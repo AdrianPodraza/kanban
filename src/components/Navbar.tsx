@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useScreenType from "../hooks/useScreenTypes";
 import logoMobile from "../assets/logo-mobile.svg";
 import arrowDown from "../assets/icon-chevron-down.svg";
 import plus from "../assets/icon-add-task-mobile.svg";
 import dots from "../assets/icon-vertical-ellipsis.svg";
 
-function Navbar(): JSX.Element {
+interface NavbarProps {
+  setIsSidebar: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function Navbar({ setIsSidebar }: NavbarProps): JSX.Element {
   const screenType: string = useScreenType();
+  useEffect(() => {
+    if (screenType === "mobile") {
+      setIsSidebar(false);
+    }
+  }, [screenType]);
   return (
-    <nav className="col-span-full flex  h-16 items-center justify-between border-b-[1px] border-grey-200 px-4 sm:col-start-2  dark:bg-gray-500">
+    <nav className="row col-span-full  flex h-16 items-center justify-between border-b-[1px] border-grey-200 px-4 sm:col-start-2  dark:bg-gray-500">
       <div className="flex gap-4">
         {screenType === "mobile" && <img src={logoMobile} alt="logo" />}
 

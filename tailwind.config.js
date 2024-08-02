@@ -8,7 +8,7 @@ export default {
         "violet-dark": "#635FC7",
         "violet-light": "#A8A4FF",
         "grey-700": "#000112",
-        "grey-600": "#20212C",
+        "grey-very-dark": "#20212C",
         "grey-500": "#2B2C37",
         "grey-400": "#3E3F4E",
         "grey-medium": "#828FA3",
@@ -22,7 +22,7 @@ export default {
       },
 
       gridTemplateColumns: {
-        "custom-1": "0.8fr 1fr 1fr 1fr 1fr",
+        "custom-1": "minmax(250px,300px) repeat(4,minmax(100px,1fr))",
       },
     },
   },
