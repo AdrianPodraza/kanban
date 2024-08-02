@@ -8,23 +8,23 @@ import dots from "../assets/icon-vertical-ellipsis.svg";
 function Navbar(): JSX.Element {
   const screenType: string = useScreenType();
   return (
-    <nav className="flex items-center px-4 py-6 justify-between dark:bg-gray-500 ">
+    <nav className="col-span-full flex  h-16 items-center justify-between border-b-[1px] border-grey-200 px-4 sm:col-start-2  dark:bg-gray-500">
       <div className="flex gap-4">
         {screenType === "mobile" && <img src={logoMobile} alt="logo" />}
 
-        <div className="flex gap-2 items-center">
-          <span className="flex font-bold text-lg dark:text-white">
+        <div className="flex items-center gap-2">
+          <span className="flex text-lg font-bold dark:text-white">
             Platform Launch
           </span>
-          <img src={arrowDown} alt="arrow down" className="w-2 h-1" />
+          <img src={arrowDown} alt="arrow down" className="h-1 w-2" />
         </div>
       </div>
-      <div className="flex gap-4 items-center">
-        <button className="rounded-full bg-violet-dark grid place-content-center w-12 h-8 sm:w-[164px] sm:h-12">
+      <div className="flex items-center gap-4">
+        <button className="grid h-8 w-12 place-content-center rounded-full bg-violet-dark sm:h-12 sm:w-[164px]">
           {screenType === "mobile" ? (
             <img src={plus} alt="add" />
           ) : (
-            <span className="text-white font-bold text-[15px]">
+            <span className="text-[15px] font-bold text-white">
               + Add New Task
             </span>
           )}

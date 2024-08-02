@@ -11,11 +11,18 @@ export default {
         "grey-600": "#20212C",
         "grey-500": "#2B2C37",
         "grey-400": "#3E3F4E",
-        "grey-300": "#828FA3",
+        "grey-medium": "#828FA3",
         "grey-200": "#E4EBFA",
-        "grey-100": "#F4F7FD",
+        "grey-light": "#F4F7FD",
         red: "#EA5555",
         "red-light": "#FF9898",
+      },
+      gridTemplateRows: {
+        "custom-1": "auto 1fr",
+      },
+
+      gridTemplateColumns: {
+        "custom-1": "0.8fr 1fr 1fr 1fr 1fr",
       },
     },
   },
