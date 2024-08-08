@@ -3,18 +3,28 @@ import logoDark from "../assets/logo-dark.svg";
 import logoLight from "../assets/logo-light.svg";
 import useDarkMode from "../hooks/useDarkMode";
 
-interface LogoProps {
+type LogoProps = {
   isSidebar: boolean;
-}
+};
 
-function Logo({ isSidebar }: LogoProps): JSX.Element {
+const Logo: React.FC<LogoProps> = ({ isSidebar }) => {
+  const [isDarkMode] = useDarkMode();
+
   return (
     <div
-      className={`${isSidebar ? "" : "border-b-[1px]"} col-start-1 row-start-1 flex h-16 items-center border-r-[1px] border-grey-200 px-4 dark:bg-gray-500`}
+      className={`${
+        isSidebar ? "" : "border-b-[1px]"
+      } col-start-1 row-start-1 flex h-16 items-center border-r-[1px] border-grey-200 dark:bg-gray-500`}
     >
-      <img src={isDarkMode ? logoLight : logoDark} alt="Logo" />
+      <img
+        src={logoLight}
+        alt="Logo"
+        className="hidden h-auto max-h-full w-auto max-w-full dark:block"
+        loading="lazy"
+      />
+      <img src={logoDark} alt="Logo" className="dark:hidden" loading="lazy" />
     </div>
   );
-}
+};
 
 export default Logo;
