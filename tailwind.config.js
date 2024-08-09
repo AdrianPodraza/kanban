@@ -16,6 +16,7 @@ export default {
         "grey-light": "#F4F7FD",
         red: "#EA5555",
         "red-light": "#FF9898",
+        "grey-opacity": "rgba(233, 239, 250, 0.5)",
       },
       gridTemplateRows: {
         "custom-1": "auto 1fr",
@@ -23,6 +24,7 @@ export default {
 
       gridTemplateColumns: {
         "custom-1": "minmax(250px,300px) repeat(4,minmax(100px,1fr))",
+        "custom-2": "repeat(2,280px)",
       },
     },
   },

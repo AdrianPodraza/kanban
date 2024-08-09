@@ -1,8 +1,12 @@
 import React from "react";
-function EmptyBoard({ isSidebar }: boolean): JSX.Element {
+
+type EmptyBoardProps = {
+  isSidebar: boolean;
+};
+function EmptyBoard({ isSidebar }: EmptyBoardProps): JSX.Element {
   return (
     <div
-      className={`${isSidebar ? " col-span-4 " : "col-span-5"} dark:bg-grey-very-dark flex flex-col items-center justify-center gap-12 bg-grey-light`}
+      className={`${isSidebar ? " col-span-4 " : "col-span-5"} flex flex-col items-center justify-center gap-12 bg-grey-light dark:bg-grey-very-dark`}
     >
       <p className="text-center text-lg font-bold text-grey-medium">
         This board is empty. Create a new column to get started.

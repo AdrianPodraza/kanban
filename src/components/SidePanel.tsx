@@ -4,6 +4,7 @@ import CreateNewBoard from "./CreateNewBoard";
 import ShowSidebar from "./ShowSidebar";
 import ToggleDarkMode from "./ToggleDarkMode";
 import useDarkMode from "../hooks/useDarkMode";
+import data from "../assets/data.json";
 interface SidebarProps {
   setIsSidebar: React.Dispatch<React.SetStateAction<boolean>>;
   isSidebar: boolean;
@@ -28,6 +29,7 @@ function SidePanel({ setIsSidebar, isSidebar }: SidebarProps): JSX.Element {
       setIsChecked(false);
     }
   }, []);
+  const [activeBoard, setActiveBoard] = useState<number | null>(0);
 
   return (
     <div
@@ -35,10 +37,17 @@ function SidePanel({ setIsSidebar, isSidebar }: SidebarProps): JSX.Element {
     >
       <div>
         <span className="ml-4 text-xs font-bold text-grey-medium">
-          ALL BOARDS (3)
+          ALL BOARDS ({data.boards.length})
         </span>
-        <BoardItem active={true} />
-        <BoardItem />
+        {data.boards.map((board, i) => (
+          <BoardItem
+            key={board.name}
+            name={board.name}
+            active={activeBoard === i}
+            onChange={() => setActiveBoard(i)}
+          />
+        ))}
+
         <CreateNewBoard />
       </div>
       <div className=" flex flex-col gap-6">

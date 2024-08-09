@@ -17,7 +17,7 @@ function Navbar({ setIsSidebar }: NavbarProps): JSX.Element {
     }
   }, [screenType]);
   return (
-    <nav className="row col-span-full  flex h-16 items-center justify-between border-b-[1px] border-grey-200 px-4 sm:col-start-2  dark:bg-gray-500">
+    <nav className="row col-span-full flex  h-16 w-full items-center justify-between border-b-[1px] border-grey-200 px-4 sm:col-start-2  dark:bg-gray-500">
       <div className="flex gap-4">
         {screenType === "mobile" && <img src={logoMobile} alt="logo" />}
 
