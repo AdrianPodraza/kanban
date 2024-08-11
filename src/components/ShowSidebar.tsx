@@ -23,7 +23,7 @@ const ShowSidebar: React.FC<ShowSidebarProps> = ({
         </span>
       </button>
       <button
-        className={`${isSidebar ? "-translate-x-full " : " translate-x-[218px] "} absolute z-10 flex h-12 w-14 items-center justify-center rounded-r-full bg-violet-dark transition-all duration-300`}
+        className={`${isSidebar ? "-translate-x-full " : " translate-x-[218px] "} -translate-y-16 absolute z-10 flex h-12 w-14 items-center justify-center rounded-r-full bg-violet-dark transition-all duration-300`}
         onClick={() => setIsSidebar((isSidebar) => !isSidebar)}
       >
         {" "}

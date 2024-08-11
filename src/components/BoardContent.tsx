@@ -1,19 +1,26 @@
 import React, { useState } from "react";
 import data from "../assets/data.json";
 
-const colors = {
-  blue: "#49C4E5",
-  purpule: "#8471F2",
-  green: "#67E2AE",
-};
 
 type EmptyBoardProps = {
   isSidebar: boolean;
 };
+const colors = [
+  "#49C4E5",
+  "#8471F2",
+  "#67E2AE",
+]
 function Column({ index }: number) {
+
+ 
   return (
-    <div className="bg-gray-200 p-4">
-      {data.boards[index].columns[index].name}
+    <div className="bg-gray-200  p-4">
+      <div className="flex gap-2 items-center font-bold text-[15px] text-grey-medium tracking-[2.4px]">
+
+      <div className={`rounded-full w-4 h-4 `} style={{
+        backgroundColor:colors[index]}} />
+        {data.boards[0].columns[index].name} ({data.boards[0].columns[index].tasks.length})
+        </div>  
     </div>
   );
 }

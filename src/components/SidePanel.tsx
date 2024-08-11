@@ -33,7 +33,7 @@ function SidePanel({ setIsSidebar, isSidebar }: SidebarProps): JSX.Element {
 
   return (
     <div
-      className={`${!isSidebar ? "absolute -translate-x-full" : " "}  row-start-2 row-end-auto flex h-full flex-col justify-between border-r-[1px] py-8 pr-4 transition-all duration-300 `}
+      className={`${!isSidebar ? "absolute top-16 bg-white -translate-x-full" : " "}  row-start-2 row-end-auto flex h-full flex-col justify-between border-r-[1px] py-8 pr-4 transition-all duration-300 `}
     >
       <div>
         <span className="ml-4 text-xs font-bold text-grey-medium">
