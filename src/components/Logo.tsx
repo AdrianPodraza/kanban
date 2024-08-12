@@ -14,7 +14,7 @@ const Logo: React.FC<LogoProps> = ({ isSidebar }) => {
     <div
       className={`${
         isSidebar ? "" : "border-b-[1px]"
-      } col-start-1 row-start-1 flex h-16 items-center border-r-[1px] border-grey-200 dark:bg-gray-500`}
+      } col-start-1 row-start-1 flex h-16 items-center border-r-[1px] border-grey-200 md:px-10 dark:bg-gray-500`}
     >
       <img
         src={logoLight}

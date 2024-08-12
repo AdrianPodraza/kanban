@@ -1,56 +1,76 @@
 import React, { useState } from "react";
 import data from "../assets/data.json";
-
-
+import Task from "./Task";
+import ScrollContainer from "react-indiana-drag-scroll";
 type EmptyBoardProps = {
   isSidebar: boolean;
+  activeBoard: number;
 };
-const colors = [
-  "#49C4E5",
-  "#8471F2",
-  "#67E2AE",
-]
-function Column({ index }: number) {
 
- 
+const colors = ["#49C4E5", "#8471F2", "#67E2AE"];
+
+type ColumnProps = {
+  index: number;
+  activeBoard: number;
+};
+
+const Column: React.FC<ColumnProps> = ({ index, activeBoard }) => {
+  const column = data.boards[activeBoard].columns[index];
+
   return (
-    <div className="bg-gray-200  p-4">
-      <div className="flex gap-2 items-center font-bold text-[15px] text-grey-medium tracking-[2.4px]">
-
-      <div className={`rounded-full w-4 h-4 `} style={{
-        backgroundColor:colors[index]}} />
-        {data.boards[0].columns[index].name} ({data.boards[0].columns[index].tasks.length})
-        </div>  
+    <div className="flex flex-col gap-6 bg-gray-200 p-4">
+      <div className="flex items-center gap-2 text-[15px] font-bold tracking-[2.4px] text-grey-medium">
+        <div
+          className="h-4 w-4 rounded-full"
+          style={{ backgroundColor: colors[index] }}
+        />
+        {column?.name} ({column?.tasks.length})
+      </div>
+      {column?.tasks.map((task, index) => (
+        <Task
+          key={index}
+          title={task.title}
+          subTaskLength={task.subtasks.length}
+          completedSubTasks={
+            task.subtasks.filter((subtask) => subtask.isCompleted).length
+          }
+        />
+      ))}
     </div>
   );
-}
-function BoardContent({ isSidebar }: EmptyBoardProps) {
+};
+
+const BoardContent: React.FC<EmptyBoardProps> = ({
+  isSidebar,
+  activeBoard,
+}) => {
   const [numColumns, setNumColumns] = useState(2);
 
   const handleAddColumn = () => {
-    setNumColumns(numColumns + 1);
+    setNumColumns((prevNum) => prevNum + 1);
   };
-  console.log(data);
+
   return (
     <div
-      className={`${isSidebar ? " col-span-4 " : "col-span-5"} flex items-center justify-center gap-12 bg-grey-light dark:bg-grey-very-dark`}
+      className={`${isSidebar ? "col-span-4" : "col-span-5"} flex items-center justify-center gap-12 bg-grey-light dark:bg-grey-very-dark`}
     >
-      <div
-        className="grid h-full w-full"
-        style={{ gridTemplateColumns: `repeat(${numColumns}, 1fr)` }}
+      <ScrollContainer
+        className="scroll-container grid h-full w-full cursor-move overflow-x-auto"
+        hideScrollbars={false}
+        style={{ gridTemplateColumns: `repeat(${numColumns + 1}, 280px)` }}
       >
         {Array.from({ length: numColumns }).map((_, index) => (
-          <Column index={index} key={index} />
+          <Column activeBoard={activeBoard} index={index} key={index} />
         ))}
         <button
-          className={`to-grey-opacity col-span-1 -col-start-1  flex h-full items-center justify-center bg-gradient-to-b from-[#E9EFFA] text-2xl font-bold text-grey-medium`}
+          className="col-span-1 ml-6 mt-16 flex h-full max-h-[800px] w-full items-center justify-center rounded-lg bg-gradient-to-b from-[#E9EFFA] to-grey-opacity text-2xl font-bold text-grey-medium"
           onClick={handleAddColumn}
         >
           + New Column
         </button>
-      </div>
+      </ScrollContainer>
     </div>
   );
-}
+};
 
 export default BoardContent;

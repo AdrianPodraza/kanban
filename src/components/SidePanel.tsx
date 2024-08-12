@@ -5,12 +5,19 @@ import ShowSidebar from "./ShowSidebar";
 import ToggleDarkMode from "./ToggleDarkMode";
 import useDarkMode from "../hooks/useDarkMode";
 import data from "../assets/data.json";
-interface SidebarProps {
+type SidebarProps = {
   setIsSidebar: React.Dispatch<React.SetStateAction<boolean>>;
   isSidebar: boolean;
-}
+  activeBoard: number;
+  setActiveBoard: any;
+};
 
-function SidePanel({ setIsSidebar, isSidebar }: SidebarProps): JSX.Element {
+function SidePanel({
+  setIsSidebar,
+  isSidebar,
+  activeBoard,
+  setActiveBoard,
+}: SidebarProps): JSX.Element {
   const [_, toggleDarkMode] = useDarkMode();
   const checkboxRef = useRef<HTMLInputElement>(null);
   const [isChecked, setIsChecked] = useState<boolean>(
@@ -29,14 +36,13 @@ function SidePanel({ setIsSidebar, isSidebar }: SidebarProps): JSX.Element {
       setIsChecked(false);
     }
   }, []);
-  const [activeBoard, setActiveBoard] = useState<number | null>(0);
 
   return (
     <div
-      className={`${!isSidebar ? "absolute top-16 bg-white -translate-x-full" : " "}  row-start-2 row-end-auto flex h-full flex-col justify-between border-r-[1px] py-8 pr-4 transition-all duration-300 `}
+      className={`${!isSidebar ? "absolute top-16 -translate-x-full bg-white" : " "}  row-start-2 row-end-auto flex h-full flex-col justify-between border-r-[1px] py-8 pr-4 transition-all duration-300 `}
     >
       <div>
-        <span className="ml-4 text-xs font-bold text-grey-medium">
+        <span className=" text-xs font-bold text-grey-medium md:px-10">
           ALL BOARDS ({data.boards.length})
         </span>
         {data.boards.map((board, i) => (

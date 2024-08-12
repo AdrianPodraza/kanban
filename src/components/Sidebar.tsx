@@ -3,12 +3,19 @@ import Logo from "./Logo";
 import useScreenType from "../hooks/useScreenTypes";
 import SidePanel from "./SidePanel";
 
-interface SidebarProps {
+type SidebarProps = {
   setIsSidebar: React.Dispatch<React.SetStateAction<boolean>>;
   isSidebar: boolean;
-}
+  activeBoard: number;
+  setActiveBoard: any;
+};
 
-const Sidebar: React.FC<SidebarProps> = ({ setIsSidebar, isSidebar }) => {
+const Sidebar: React.FC<SidebarProps> = ({
+  setIsSidebar,
+  isSidebar,
+  activeBoard,
+  setActiveBoard,
+}: SidebarProps) => {
   const screenType: string = useScreenType();
   if (screenType === "mobile") {
     return null;
@@ -16,7 +23,12 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebar, isSidebar }) => {
   return (
     <>
       <Logo isSidebar={isSidebar} />
-      <SidePanel setIsSidebar={setIsSidebar} isSidebar={isSidebar} />
+      <SidePanel
+        activeBoard={activeBoard}
+        setActiveBoard={setActiveBoard}
+        setIsSidebar={setIsSidebar}
+        isSidebar={isSidebar}
+      />
     </>
   );
 };
