@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import data from "../assets/data.json";
 import Task from "./Task";
 import ScrollContainer from "react-indiana-drag-scroll";
+import NewColumnForm from "./NewColumnForm";
+
 type EmptyBoardProps = {
   isSidebar: boolean;
   activeBoard: number;
@@ -44,16 +46,23 @@ const BoardContent: React.FC<EmptyBoardProps> = ({
   isSidebar,
   activeBoard,
 }) => {
-  const [numColumns, setNumColumns] = useState(2);
+  const [numColumns, setNumColumns] = useState<number>(2);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const handleAddColumn = () => {
-    setNumColumns((prevNum) => prevNum + 1);
+    setShowModal(true);
   };
 
   return (
     <div
       className={`${isSidebar ? "col-span-4" : "col-span-5"} flex items-center justify-center gap-12 bg-grey-light dark:bg-grey-very-dark`}
     >
+      {showModal && (
+        <NewColumnForm
+          columns={data.boards[activeBoard].columns}
+          handleCloseModal={() => setShowModal(false)}
+        />
+      )}
       <ScrollContainer
         className="scroll-container grid h-full w-full cursor-move overflow-x-auto"
         hideScrollbars={false}

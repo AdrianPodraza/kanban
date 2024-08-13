@@ -5,7 +5,6 @@ import EmptyBoard from "./components/EmptyBoard";
 import useDarkMode from "./hooks/useDarkMode";
 import data from "./assets/data.json";
 import BoardContent from "./components/BoardContent";
-import NewColumnForm from "./components/NewColumnForm";
 
 function App() {
   const [isSidebar, setIsSidebar] = useState(true);
@@ -28,7 +27,6 @@ function App() {
       ) : (
         <BoardContent activeBoard={activeBoard} isSidebar={isSidebar} />
       )}
-      <NewColumnForm />
     </div>
   );
 }
