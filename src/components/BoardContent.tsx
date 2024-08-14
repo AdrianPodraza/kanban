@@ -3,6 +3,7 @@ import data from "../assets/data.json";
 import Task from "./Task";
 import ScrollContainer from "react-indiana-drag-scroll";
 import NewColumnForm from "./NewColumnForm";
+import { useAppContext } from "../context/useDataContext";
 
 type EmptyBoardProps = {
   isSidebar: boolean;
@@ -17,6 +18,7 @@ type ColumnProps = {
 };
 
 const Column: React.FC<ColumnProps> = ({ index, activeBoard }) => {
+  const { data } = useAppContext();
   const column = data.boards[activeBoard].columns[index];
 
   return (
@@ -60,6 +62,7 @@ const BoardContent: React.FC<EmptyBoardProps> = ({
       {showModal && (
         <NewColumnForm
           columns={data.boards[activeBoard].columns}
+          boardName={data.boards[activeBoard].name}
           handleCloseModal={() => setShowModal(false)}
         />
       )}

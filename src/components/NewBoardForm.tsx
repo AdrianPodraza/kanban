@@ -1,6 +1,6 @@
 import React from "react";
 
-function NewColumnForm({ handleCloseModal, columns, boardName }) {
+function NewBoardForm({ handleCloseModal, columns }) {
   return (
     <div
       className="fixed inset-0  flex h-screen w-screen items-center justify-center bg-black bg-opacity-20"
@@ -10,17 +10,16 @@ function NewColumnForm({ handleCloseModal, columns, boardName }) {
         className=" flex w-[480px] flex-col gap-4 rounded-lg bg-white px-6 py-6"
         onClick={(e) => e.stopPropagation()}
       >
-        <h3 className="text-lg font-bold">Edit Board</h3>
+        <h3 className="text-lg font-bold">Add New Board</h3>
 
         <label
           className="text-xs font-bold text-grey-medium"
           htmlFor="boardName"
         >
-          Board Name
+          Name
         </label>
         <input
           id="boardName"
-          value={boardName}
           type="text"
           className="rounded-lg border-[1px] border-[#828FA3] border-opacity-25 px-2 py-2 focus:outline-none"
           placeholder="e.g. Web Design"
@@ -37,9 +36,9 @@ function NewColumnForm({ handleCloseModal, columns, boardName }) {
             <div className=" flex items-center gap-7">
               <input
                 id="columnName"
+                disabled={true}
                 value={column.name}
                 type="text"
-                onChange={(e) => (e.target.value = column.name)}
                 className="w-full rounded-lg border-[1px] border-[#828FA3] border-opacity-25 px-2 py-2 focus:outline-none"
               />
               <button onClick={(e) => e.preventDefault()}>
@@ -72,4 +71,4 @@ function NewColumnForm({ handleCloseModal, columns, boardName }) {
   );
 }
 
-export default NewColumnForm;
+export default NewBoardForm;
