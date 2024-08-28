@@ -4,7 +4,8 @@ import CreateNewBoard from "./CreateNewBoard";
 import ShowSidebar from "./ShowSidebar";
 import ToggleDarkMode from "./ToggleDarkMode";
 import useDarkMode from "../hooks/useDarkMode";
-import data from "../assets/data.json";
+import { useAppContext } from "../context/useDataContext"; // Upewnij się, że kontekst jest poprawnie zaimportowany
+
 type SidebarProps = {
   setIsSidebar: React.Dispatch<React.SetStateAction<boolean>>;
   isSidebar: boolean;
@@ -24,10 +25,13 @@ function SidePanel({
     document.documentElement.classList.contains("dark"),
   );
 
+  const { data } = useAppContext(); // Pobierz dane z kontekstu
+
   const handleToggleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     toggleDarkMode();
     setIsChecked(event.target.checked);
   };
+
   useEffect(() => {
     const savedMode = localStorage.getItem("darkMode");
     if (savedMode === "true") {
@@ -43,9 +47,9 @@ function SidePanel({
     >
       <div>
         <span className=" text-xs font-bold text-grey-medium md:px-10">
-          ALL BOARDS ({data.boards.length})
+          ALL BOARDS ({data.length})
         </span>
-        {data.boards.map((board, i) => (
+        {data.map((board, i) => (
           <BoardItem
             key={board.name}
             name={board.name}

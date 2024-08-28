@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
-import dataInitial from "../assets/data.json";
+import dataInitial from "../assets/data.json"; // Upewnij się, że struktura JSON jest zgodna
+
 type Subtask = {
   title: string;
   isCompleted: boolean;
@@ -23,9 +24,16 @@ type Board = {
 };
 
 type AppContextType = {
-  boards: Board[];
+  data: Board[];
   addBoard: (board: Board) => void;
-  data: any;
+  updateBoardName: (oldName: string, newName: string) => void;
+  updateColumnName: (
+    boardName: string,
+    oldColumnName: string,
+    newColumnName: string,
+  ) => void;
+  addColumn: (boardName: string) => void;
+  updateData: (newData: Board[]) => void;
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -33,15 +41,71 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [boards, setBoards] = useState<Board[]>([]);
-  const [data, setData] = useState<Object>(dataInitial);
+  const [data, setData] = useState<Board[]>(dataInitial.boards);
 
   const addBoard = (board: Board) => {
-    setBoards((prevBoards) => [...prevBoards, board]);
+    setData((prevData) => [...prevData, board]);
+  };
+
+  const updateBoardName = (oldName: string, newName: string) => {
+    setData((prevData) =>
+      prevData.map((board) =>
+        board.name === oldName ? { ...board, name: newName } : board,
+      ),
+    );
+  };
+
+  const updateColumnName = (
+    boardName: string,
+    oldColumnName: string,
+    newColumnName: string,
+  ) => {
+    setData((prevData) =>
+      prevData.map((board) =>
+        board.name === boardName
+          ? {
+              ...board,
+              columns: board.columns.map((column) =>
+                column.name === oldColumnName
+                  ? { ...column, name: newColumnName }
+                  : column,
+              ),
+            }
+          : board,
+      ),
+    );
+  };
+
+  const addColumn = (boardName: string) => {
+    setData((prevData) =>
+      prevData.map((board) => {
+        if (board.name === boardName) {
+          const newColumn: Column = { name: "", tasks: [] };
+          return {
+            ...board,
+            columns: [...board.columns, newColumn],
+          };
+        }
+        return board;
+      }),
+    );
+  };
+
+  const updateData = (newData: Board[]) => {
+    setData(newData);
   };
 
   return (
-    <AppContext.Provider value={{ boards, addBoard, data }}>
+    <AppContext.Provider
+      value={{
+        data,
+        addBoard,
+        updateBoardName,
+        updateColumnName,
+        addColumn,
+        updateData,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );
